@@ -404,7 +404,7 @@ def rewrite_etc_hosts(port):
         else:
             raise
     if old_content.strip() and not os.path.exists(BAKFILE):
-        os.link(HOSTSFILE, BAKFILE)
+        os.symlink(HOSTSFILE, BAKFILE)
     tmpname = "%s.%d.tmp" % (HOSTSFILE, port)
     f = open(tmpname, 'w')
     for line in old_content.rstrip().split('\n'):
@@ -421,7 +421,7 @@ def rewrite_etc_hosts(port):
     else:
         os.chown(tmpname, 0, 0)
         os.chmod(tmpname, 0644)
-    os.rename(tmpname, HOSTSFILE)
+    os.copy(tmpname, HOSTSFILE)
 
 
 def restore_etc_hosts(port):
