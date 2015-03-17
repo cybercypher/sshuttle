@@ -1,4 +1,4 @@
-import re, errno, socket, select, signal, struct
+import re, errno, socket, select, signal, struct, shutil
 import compat.ssubprocess as ssubprocess
 import helpers, ssyslog
 from helpers import *
@@ -421,7 +421,7 @@ def rewrite_etc_hosts(port):
     else:
         os.chown(tmpname, 0, 0)
         os.chmod(tmpname, 0644)
-    os.copy(tmpname, HOSTSFILE)
+    shutil.copy(tmpname, HOSTSFILE)
 
 
 def restore_etc_hosts(port):
